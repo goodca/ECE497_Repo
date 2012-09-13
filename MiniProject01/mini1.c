@@ -436,15 +436,13 @@ int main(int argc, char **argv, char **envp)
 			printf("\npoll() GPIO %d interrupt occurred, value=%c, len=%d\n",
 				 gpio, buf[0], len);
 			char val = (char)buf[0];
-			
-			gpio_set_value(LEDgpio,(i2cget()>34));
-			setpwm(100*readAnalogIn()/4095,1000);
-			if(i < 99){
-				i++;
+			//49 is 1 in ASCII			
+			if(val == 49){
+				//if temp is over 34* c, turn on LED
+				gpio_set_value(LEDgpio,(i2cget()>34));
+				//create percentage of max value and set PWM to that
+				setpwm(100*readAnalogIn()/4095,1000);
 			}
-			i2cget();
-			
-			//printf("%d\n",100*readAnalogIn()/4095);
 		}
 
 		if (fdset[0].revents & POLLIN) {
