@@ -1,4 +1,6 @@
 /** demonstrates usage of the SoftPot variable potentiometer
+ * prints percent value once every second
+ * Author: Christopher Good
 */
 
 #include <stdio.h>
